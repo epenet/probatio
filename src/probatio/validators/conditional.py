@@ -21,6 +21,7 @@ from __future__ import annotations
 import typing
 from collections.abc import Mapping
 
+from probatio._messages import plain_strings
 from probatio.error import (
     DictInvalid,
     ExclusiveInvalid,
@@ -306,7 +307,7 @@ class _KeyGroup(_SafeValidator):
 
         A ``StrEnum`` key then reads as its value in the message, not its repr.
         """
-        return [str(key) if isinstance(key, str) else key for key in self.keys]
+        return plain_strings(self.keys)
 
     def _mapping(self, value: typing.Any) -> Mapping[typing.Any, typing.Any] | None:
         """Return the value as a mapping, or None to pass a non-mapping through.
